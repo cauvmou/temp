@@ -10,10 +10,9 @@ decho () {
 
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
-decho "upgrade"
-apt upgrade
-decho "update"
+decho "updating packages"
 apt -yq update --assume-yes
+apt -yq upgrade --assume-yes
 decho "installing (tmux openssh-client openssh-server iptables-persistent conntrack)"
 apt -yq install --assume-yes tmux openssh-client openssh-server iptables-persistent conntrack
 
