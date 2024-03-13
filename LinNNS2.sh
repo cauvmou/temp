@@ -6,6 +6,7 @@ set +x
 sudo su -
 
 # Update + Package install
+DEBIAN_FRONTEND=noninteractive
 apt upgrade -y
 apt update -y
 apt install -y tmux openssh-client openssh-server iptables-persistent conntrack
