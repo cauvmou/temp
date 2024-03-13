@@ -9,6 +9,9 @@ decho () {
   echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
 }
 
+echo -n -e "${COL_DEB}Name: ${COL_NON}"
+read NAME
+
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
 decho "updating packages"
@@ -20,9 +23,9 @@ apt -yq install --assume-yes openssh-client dnsutils
 # Set hostname
 decho "changing hostname..."
 OLD_HOST=$(hostname)
-sed -i "s/$OLD_HOST/LinNNC1/g" /etc/hosts
-hostnamectl hostname LinNNC1
-decho "new hostname is 'LinNNC1'"
+sed -i "s/$OLD_HOST/Lin${NAME}C1/g" /etc/hosts
+hostnamectl hostname Lin${NAME}C1
+decho "new hostname is 'Lin${NAME}C1'"
 
 # Netplan
 decho "netplan"

@@ -9,6 +9,9 @@ decho () {
   echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
 }
 
+echo -n -e "${COL_DEB}Name: ${COL_NON}"
+read NAME
+
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
 decho "updating packages"
@@ -20,9 +23,9 @@ apt -yq install --assume-yes tmux openssh-client openssh-server iptables-persist
 # Set hostname
 decho "changing hostname..."
 OLD_HOST=$(hostname)
-sed -i "s/$OLD_HOST/LinNNS2/g" /etc/hosts
-hostnamectl hostname LinNNS2
-decho "new hostname is 'LinNNS2'"
+sed -i "s/$OLD_HOST/Lin${NAME}S2/g" /etc/hosts
+hostnamectl hostname Lin${NAME}S2
+decho "new hostname is 'Lin${NAME}S2'"
 
 # Enable routing
 decho "routing"

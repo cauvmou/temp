@@ -9,6 +9,9 @@ decho () {
   echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
 }
 
+echo -n -e "${COL_DEB}Name: ${COL_NON}"
+read NAME
+
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
 decho "updating packages"
@@ -19,9 +22,9 @@ apt -yq install --assume-yes isc-dhcp-server bind9 dnsutils bind9-doc
 
 decho "changing hostname..."
 OLD_HOST=$(hostname)
-sed -i "s/$OLD_HOST/LinNNS1/g" /etc/hosts
-hostnamectl hostname LinNNS1
-decho "new hostname is 'LinNNS1'"
+sed -i "s/$OLD_HOST/Lin${NAME}S1/g" /etc/hosts
+hostnamectl hostname Lin${NAME}S1
+decho "new hostname is 'Lin${NAME}S1'"
 
 # Netplan
 decho "netplan"
