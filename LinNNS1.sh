@@ -112,3 +112,5 @@ EOF
 decho "services"
 systemctl enable --now named
 systemctl enable --now isc-dhcp-server
+decho "DONE!"
+exit
