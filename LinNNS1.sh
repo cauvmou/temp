@@ -1,7 +1,7 @@
 #!/bin/bash
 # Debug
 sudo su -
-set +x
+set -x
 COL_DEB='\033[1;32m'
 COL_NON='\033[0m'
 
