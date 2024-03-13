@@ -4,7 +4,7 @@ set +x
 COL_DEB='\033[1;32m'
 COL_NON='\033[0m'
 
-function decho {
+decho () {
   echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
 }
 
