@@ -35,7 +35,7 @@ MAC_DMZ=$(ip -o link show ens35 | grep -oh ..:..:..:..:..:.. | head -1)
 
 # Netplan
 mv /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
-echo <<EOF
+cat << EOF
 network:
   version: 2
   renderer: networkd
