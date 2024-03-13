@@ -48,7 +48,7 @@ EOF
 netplan apply
 
 # Domain
-decho "joining domain..."
+decho "joining domain (corp.$NAME.at)"
 realm join corp.$NAME.at
 # echo "services = nss, pam" >> /etc/sssd/sssd.conf # Unsure
 pam-auth-update --enable mkhomedir
