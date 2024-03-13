@@ -110,5 +110,5 @@ options {
 EOF
 
 decho "services"
-systemctl enable --now bind9
+systemctl enable --now named
 systemctl enable --now isc-dhcp-server
