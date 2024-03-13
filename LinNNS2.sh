@@ -8,9 +8,6 @@ function decho {
   echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
 }
 
-# Run as root
-sudo su -
-
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
 decho "upgrade"
