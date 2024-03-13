@@ -1,5 +1,6 @@
 #!/bin/bash
 # Debug
+sudo su -
 set +x
 COL_DEB='\033[1;32m'
 COL_NON='\033[0m'
@@ -119,3 +120,4 @@ decho "saving iptables..."
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
 decho "DONE!"
+exit
