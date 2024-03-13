@@ -20,7 +20,7 @@ apt -yq install --assume-yes isc-dhcp-server bind9 dnsutils bind9-doc
 decho "changing hostname..."
 OLD_HOST=$(hostname)
 sed -i "s/$OLD_HOST/LinNNS1/g" /etc/hosts
-hostnamectl hostname LinNNS2
+hostnamectl hostname LinNNS1
 decho "new hostname is 'LinNNS1'"
 
 # Netplan
