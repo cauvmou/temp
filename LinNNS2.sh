@@ -1,25 +1,38 @@
 #!/bin/bash
 # Debug
 set +x
+COL_DEB='\033[1;32m'
+COL_NON='\033[0m'
+
+function decho {
+  echo -e "${COL_DEB}[$(date '+%Y-%m-%d %T.%4N')]-[DEBUG]:${COL_NON} $@"
+}
 
 # Run as root
 sudo su -
 
 # Update + Package install
 export DEBIAN_FRONTEND=noninteractive
+decho "upgrade"
 apt upgrade
+decho "update"
 apt -yq update --assume-yes
+decho "installing (tmux openssh-client openssh-server iptables-persistent conntrack)"
 apt -yq install --assume-yes tmux openssh-client openssh-server iptables-persistent conntrack
 
 # Set hostname
+decho "changing hostname..."
 OLD_HOST=$(hostname)
 sed -i "s/$OLD_HOST/LinNNS2/g" /etc/hosts
 hostnamectl hostname LinNNS2
+decho "new hostname is 'LinNNS2'"
 
 # Enable routing
+decho "routing"
 sed -i "/^#.*ip_forward/s/^#\s*//" /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
 
+decho "netplan"
 MAC_OUT=$(ip -o link show ens33 | grep -oh ..:..:..:..:..:.. | head -1)
 MAC_LAN=$(ip -o link show ens34 | grep -oh ..:..:..:..:..:.. | head -1)
 MAC_DMZ=$(ip -o link show ens35 | grep -oh ..:..:..:..:..:.. | head -1)
@@ -55,6 +68,7 @@ network:
 EOF > /etc/netplan/00-custom.yaml
 
 # Iptables
+decho "configuring iptables..."
 IPT="/sbin/iptables"
 
 # Flush und Löschen der Custom-Chains
@@ -103,3 +117,8 @@ $IPT -A dmz_ext -j REJECT
 
 # MASQUERADING
 $IPT -t nat -A POSTROUTING -o outside -j MASQUERADE
+
+# Save
+decho "saving iptables..."
+iptables-save | tee /etc/iptables/rules.v4
+ip6tables-save | tee /etc/iptables/rules.v6
