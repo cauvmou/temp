@@ -66,7 +66,7 @@ network:
         - 192.168.30.254/24
       dhcp4: false
 EOF
-
+netplan apply
 # Iptables
 decho "configuring iptables..."
 IPT="/sbin/iptables"

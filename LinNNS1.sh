@@ -57,7 +57,7 @@ network:
       nameservers:
         addresses: [1.1.1.1, 8.8.8.8]
 EOF
-
+netplan apply
 # DHCP
 decho "dhcp"
 cat > /etc/dhcp/dhcpd.conf << EOF
