@@ -1,7 +1,9 @@
 #!/bin/bash
 # Debug
-sudo su -
-set -x
+if [ $EUID -ne 0 ]; then
+  exit 1
+fi
+
 COL_DEB='\033[1;32m'
 COL_NON='\033[0m'
 
@@ -52,4 +54,4 @@ realm join corp.$NAME.at
 pam-auth-update --enable mkhomedir
 
 decho "DONE!"
-exit
+exit 0
