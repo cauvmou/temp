@@ -118,3 +118,4 @@ $IPT -t nat -A POSTROUTING -o outside -j MASQUERADE
 decho "saving iptables..."
 iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
+decho "DONE!"
