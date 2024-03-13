@@ -6,10 +6,10 @@ set +x
 sudo su -
 
 # Update + Package install
-DEBIAN_FRONTEND=noninteractive
-apt upgrade -y
-apt update -y
-apt install -y tmux openssh-client openssh-server iptables-persistent conntrack
+export DEBIAN_FRONTEND=noninteractive
+apt upgrade
+apt -yq update
+apt -yq install tmux openssh-client openssh-server iptables-persistent conntrack
 
 # Set hostname
 OLD_HOST=$(hostname)
