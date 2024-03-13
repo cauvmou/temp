@@ -114,6 +114,17 @@ options {
 };
 EOF
 
+# wait for ip
+check_ip_address () {
+    ip address show dev "dmz" | grep -q "inet "
+}
+
+decho "waiting for address on interface 'dmz'..."
+while ! check_ip_address; do
+    sleep 1
+done
+decho "got ip: '$(ip -o -4 a show lan | grep -oP '\d+(\.\d+){3}' | head -1)'"
+
 decho "services"
 systemctl enable --now named
 systemctl enable --now isc-dhcp-server
