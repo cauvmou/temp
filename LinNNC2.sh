@@ -47,10 +47,20 @@ network:
 EOF
 netplan apply
 
+# wait for ip
+check_ip_address() {
+    ip address show dev "lan" | grep -q "inet "
+}
+
+decho "waiting for address on interface 'lan'..."
+while ! check_ip_address; do
+    sleep 1
+done
+decho "got ip: '$(ip -o -4 a show lan | grep -oP '\d+(\.\d+){3}' | head -1)'"
+
 # Domain
 decho "joining domain (corp.$NAME.at)"
 realm join corp.$NAME.at
-# echo "services = nss, pam" >> /etc/sssd/sssd.conf # Unsure
 pam-auth-update --enable mkhomedir
 
 decho "DONE!"
