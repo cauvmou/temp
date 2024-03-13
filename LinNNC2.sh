@@ -25,9 +25,9 @@ apt -yq install --assume-yes openssh-client dnsutils realmd sssd sssd-tools adcl
 # Set hostname
 decho "changing hostname..."
 OLD_HOST=$(hostname)
-sed -i "s/$OLD_HOST/Lin${NAME}C2/g" /etc/hosts
-hostnamectl hostname Lin${NAME}C2
-decho "new hostname is 'Lin${NAME}C2'"
+sed -i "s/$OLD_HOST/Lin${NAME}C2.corp.${NAME}.at/g" /etc/hosts
+hostnamectl hostname Lin${NAME}C2.corp.${NAME}.at
+decho "new hostname is 'Lin${NAME}C2.corp.${NAME}.at'"
 
 # Netplan
 decho "netplan"
