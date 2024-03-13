@@ -48,7 +48,7 @@ EOF
 netplan apply
 
 # wait for ip
-check_ip_address() {
+check_ip_address () {
     ip address show dev "lan" | grep -q "inet "
 }
 
